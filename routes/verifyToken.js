@@ -21,13 +21,25 @@ const jwt = require("jsonwebtoken")
 
 const verifyTokenAndAuthorization = (req,res,next)=>{
     verifyToken(req,res,()=>{
-        if(req.user.id === req.params.id || isAdmin){
+        if(req.user.id === req.params.id || req.user.isAdmin){
             next()
 
         }else{
-            res.status(403).json("You are not authorized to edit this user")
+            res.status(403).json("You are not authorized to do this")
         }
     })
 
 }
-module.exports = {verifyTokenAndAuthorization}
+
+const verifyTokenAndAdmin = (req,res,next)=>{
+    verifyToken(req,res,()=>{
+        if(req.user.isAdmin){
+            next()
+
+        }else{
+            res.status(403).json("You are not authorized to do that")
+        }
+    })
+
+}
+module.exports = {verifyTokenAndAuthorization,verifyTokenAndAdmin}
