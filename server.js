@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const userRouter = require("./routes/user")
 const authRouter = require("./routes/auth")
 const productRouter = require("./routes/product")
+const cartRouter = require("./routes/cart")
 
 
 
@@ -16,10 +17,10 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //routes
-
 app.use("/api/v1/auth",authRouter);
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/products",productRouter);
+app.use("/api/v1/carts",cartRouter);
 
 
 
